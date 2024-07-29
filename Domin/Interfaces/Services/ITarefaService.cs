@@ -13,5 +13,6 @@ namespace Domin.Interfaces.Services
         Task<TarefaEntity> AddAsync(TarefaEntity tarefa);
         Task UpdateAsync(TarefaEntity tarefa, string comentario, long IdUusuario);
         Task RemoveAsync(long id);
+        Task<IEnumerable<RelatorioEntity>> GetRelatoriodAsync(UsuarioEntity usuario);
     }
 }

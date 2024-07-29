@@ -229,6 +229,31 @@ namespace Data.Repositories
             }
         }
 
+        public async Task<IEnumerable<RelatorioEntity>> GetRelatoriodAsync()
+        {
+            try
+            {
+                var query = @"
+                            SELECT 
+                                u.Id   AS IdUsuario, 
+                                u.Nome AS NomeUsuario, 
+                                COUNT(t.Id) / 30.0 AS MediaTarefasCompletas
+                            FROM       Usuarios u
+                            LEFT JOIN  Projetos p ON u.Id = p.IdUsuario
+                            LEFT JOIN  Tarefas  t ON p.Id = t.IdProjeto
+                            WHERE t.Status = 2 AND 
+                                  t.DataAtualizacao >= DATEADD(DAY, -30, GETDATE())
+                            GROUP BY u.Id, u.Nome";
+
+                return await _uow.Connection.QueryAsync<RelatorioEntity>(query.ToString());
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            };
+        }
+
         public bool IsPendente (long idProjeto)
         {
             var query = @"

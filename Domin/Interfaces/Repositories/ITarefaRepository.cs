@@ -8,7 +8,8 @@ namespace Domin.Interfaces.Repositories
         Task<TarefaEntity> AddAsync(TarefaEntity tarefa);
         Task UpdateAsync(TarefaEntity tarefa, string comentario, long IdUusuario);
         Task RemoveAsync(long id);
-        public bool IsPendente(long idProjeto);
-        public int Limite(long idProjeto);
+        Task<IEnumerable<RelatorioEntity>> GetRelatoriodAsync();
+        bool IsPendente(long idProjeto);
+        int Limite(long idProjeto);
     }
 }

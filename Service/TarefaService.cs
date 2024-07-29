@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Domin.Util.Utilidades;
 
 namespace Service
 {
@@ -47,6 +48,14 @@ namespace Service
         {
             await _tarefaRepository.UpdateAsync(tarefa, comentario, IdUusuario);
             return;
+        }
+
+        public async Task<IEnumerable<RelatorioEntity>> GetRelatoriodAsync(UsuarioEntity usuario)
+        {
+            if (usuario.Funcao != Funcao.Gerente)
+                return null;
+
+            return await _tarefaRepository.GetRelatoriodAsync();
         }
     }
 }
