@@ -81,3 +81,13 @@ Proteção contra Vulnerabilidades:
 5. Testes e Qualidade do Código
 Testes Automatizados:
     Aumentar a cobertura de testes unitários, testes de integração e testes
+-------------------------------------------------------------------------------
+Comondo usados no Docker.
+
+Para criar a imagem Docker
+docker build -t gerenciamentotarefas .
+
+Para executar um novo contêiner, mapeando a porta 8080
+docker run -d -p 8080:8080 --name gerenciamentotarefas_container gerenciamentotarefas
+
+Os arquivos Dockerfile e docker-compose.yml encontra-se na raiz do projeto.
