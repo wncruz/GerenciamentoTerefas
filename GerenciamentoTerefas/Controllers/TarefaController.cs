@@ -30,9 +30,23 @@ namespace GerenciamentoTerefas.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/v1/Tarefa/RelatorioUsuarioMedio")]
+        public async Task<ActionResult> GetRelatorio([FromBody] UsuarioEntity usuario)
+        {
+            try
+            {
+                return Ok(await _tarefaService.GetRelatoriodAsync(usuario));
+            }
+            catch (ArgumentException e)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
+            }
+        }
+
         [HttpPost]
         [Route("api/v1/Tarefa/CriarTarefa")]
-        public async Task<ActionResult> Add(TarefaEntity tarefa)
+        public async Task<ActionResult> Add([FromBody] TarefaEntity tarefa)
         {
             try
             {
@@ -50,7 +64,7 @@ namespace GerenciamentoTerefas.Controllers
 
         [HttpPut]
         [Route("api/v1/Tarefa/AtualizaTarefa/{comentario}/{IdUusuario}")]
-        public async Task<ActionResult> Update(TarefaEntity projeto, string comentario, long IdUusuario)
+        public async Task<ActionResult> Update([FromBody] TarefaEntity projeto, string comentario, long IdUusuario)
         {
             try
             {
